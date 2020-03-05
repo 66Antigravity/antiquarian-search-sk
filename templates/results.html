@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="utf-8">
+    <title>Výsledky vyhľadávania</title>
+</head>
+<p>
+
+<H1>Výsledky vyhľadávania</H1>
+
+{% for result in results %}
+    <H1>{{  result[0]  }}</H1>
+
+    {% for page in result[1] %}
+        <p><li><a href="{{ page }}">{{ page }}</a></li></p>
+    {% endfor %}
+{% endfor %}
+
+{#{% for result in results %}#}
+{#    {% for name, list_dict in result.items() %}#}
+{#        <H2>{{ name }}</H2>#}
+{#            {% for domain, pages in list_dict.items() %}#}
+{#                <H1>{{ domain }}</H1>#}
+{#                {% for page in pages %}#}
+{#                    <p>page</p>#}
+{#                {% endfor %}#}
+{#            {% endfor %}#}
+{#    {% endfor %}#}
+{#{% endfor %}#}
+
+</body>
+</html>
