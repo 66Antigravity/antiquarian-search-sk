@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="utf-8">
+    <title>Výsledky vyhľadávania</title>
+</head>
+<p>
+
+<H1>Výsledky vyhľadávania</H1>
+
+{% for result in results %}
+    <H1>{{  result[0]  }}</H1>
+
+    {% for page in result[1] %}
+        <p><li><a href="{{ page }}">{{ page }}</a></li></p>
+    {% endfor %}
+{% endfor %}
+
+</body>
+</html>
