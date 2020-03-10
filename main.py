@@ -1,4 +1,6 @@
-from googlesearch import search
+import sys
+import os
+from googlesearch_copy import search
 from pandas import read_excel
 import xlrd
 from jinja2 import Environment, FileSystemLoader
@@ -45,26 +47,31 @@ class Searcher:
 
 
 def main():
-    start = time()
-    num = input("Zadaj cislo (cele) ako pocet sekund medzi jednotlivymi vyhladavaniami: ")
+    num = input("Zadaj cislo (cele) ako pocet sekund medzi jednotlivymi vyhladavaniami: \n")
+    # num = 1
     pause = int(num)
 
+    cur_dir = os.path.dirname(os.path.abspath(sys.argv[0]))
+    print("\n\n")
+    start = time()
     searcher = Searcher(pause)
-    results = searcher.search_dummy('Antik.xlsx')
+    path = f"{cur_dir}/Antik.xlsx"
+    results = searcher.search_dummy(path)
     html_writer(results)
     end = time()
-    print("celkovy cas: ", end-start)
+    print("\n\nCelkovy cas (sekundy): ", end-start)
 #     2:12:30 ; 4:24:51
 
 
 def html_writer(results):
-    file_loader = FileSystemLoader('templates')
+    cur_dir = os.path.dirname(os.path.abspath(sys.argv[0]))
+    file_loader = FileSystemLoader(f"{cur_dir}/templates/")
     env = Environment(loader=file_loader)
 
-    template = env.get_template('vysledky.html')
+    template = env.get_template("vysledky.html")
 
     output = template.render(results=results)
-    with open("vysledky.html", "w") as html_file:
+    with open(f"{cur_dir}vysledky.html", "w") as html_file:
         print(output, file=html_file)
 
 
